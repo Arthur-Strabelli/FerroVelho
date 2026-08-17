@@ -68,11 +68,13 @@ class ClienteBD
     {
         if ($pesquisa !== '') {
             $sql = 'SELECT * FROM clientes
-                    WHERE nome LIKE :pesquisa OR cpf LIKE :pesquisa OR cidade LIKE :pesquisa
+                    WHERE nome LIKE :nome OR cpf LIKE :cpf OR cidade LIKE :cidade
                     ORDER BY nome ASC';
             $stmt = $this->pdo->prepare($sql);
             $termo = '%' . $pesquisa . '%';
-            $stmt->bindParam(':pesquisa', $termo);
+            $stmt->bindParam(':nome', $termo);
+            $stmt->bindParam(':cpf', $termo);
+            $stmt->bindParam(':cidade', $termo);
         } else {
             $sql = 'SELECT * FROM clientes ORDER BY nome ASC';
             $stmt = $this->pdo->prepare($sql);

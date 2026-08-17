@@ -91,11 +91,13 @@ class CarroBD
     {
         if ($pesquisa !== '') {
             $sql = 'SELECT * FROM veiculos
-                    WHERE modelo LIKE :pesquisa OR marca LIKE :pesquisa OR ano LIKE :pesquisa
+                    WHERE modelo LIKE :modelo OR marca LIKE :marca OR ano LIKE :ano
                     ORDER BY criado_em DESC';
             $stmt = $this->pdo->prepare($sql);
             $termo = '%' . $pesquisa . '%';
-            $stmt->bindParam(':pesquisa', $termo);
+            $stmt->bindParam(':modelo', $termo);
+            $stmt->bindParam(':marca', $termo);
+            $stmt->bindParam(':ano', $termo);
         } else {
             $sql = 'SELECT * FROM veiculos ORDER BY criado_em DESC';
             $stmt = $this->pdo->prepare($sql);

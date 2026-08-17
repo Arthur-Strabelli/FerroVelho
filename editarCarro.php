@@ -12,6 +12,11 @@ $carroBD = new CarroBD();
 $idVeiculo = (int) ($_GET['id'] ?? $_POST['id_veiculo'] ?? 0);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (empty($_POST) && !empty($_SERVER['CONTENT_LENGTH'])) {
+        header('Location: editarCarro.php?id=' . $idVeiculo . '&msg=imagem_grande');
+        exit;
+    }
+
     $dados = [
         'modelo'        => trim($_POST['modelo'] ?? ''),
         'marca'         => trim($_POST['marca'] ?? ''),
@@ -35,6 +40,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $resultadoUpload = fazerUploadImagem($_FILES['imagem']);
         if ($resultadoUpload === 'ERRO_FORMATO') {
             header('Location: editarCarro.php?id=' . $idVeiculo . '&msg=imagem_invalida');
+            exit;
+        }
+        if ($resultadoUpload === 'ERRO_TAMANHO') {
+            header('Location: editarCarro.php?id=' . $idVeiculo . '&msg=imagem_grande');
             exit;
         }
         $dados['imagem'] = $resultadoUpload;

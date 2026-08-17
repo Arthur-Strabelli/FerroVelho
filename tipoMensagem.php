@@ -14,6 +14,7 @@ function obterMensagem(string $codigo): ?array
         'veiculo_excluido'   => ['tipo' => 'success', 'texto' => 'Veículo excluído com sucesso!'],
         'veiculo_erro'       => ['tipo' => 'danger',  'texto' => 'Ocorreu um erro ao processar o veículo.'],
         'imagem_invalida'    => ['tipo' => 'danger',  'texto' => 'Formato de imagem inválido. Utilize JPG, JPEG ou PNG.'],
+        'imagem_grande'      => ['tipo' => 'danger',  'texto' => 'A imagem é muito grande. Envie um arquivo menor.'],
 
         'comentario_adicionado' => ['tipo' => 'success', 'texto' => 'Comentário adicionado com sucesso!'],
         'comentario_erro'       => ['tipo' => 'danger',  'texto' => 'Não foi possível adicionar o comentário.'],

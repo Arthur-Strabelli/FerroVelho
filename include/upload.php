@@ -6,6 +6,16 @@ function fazerUploadImagem(array $arquivo): ?string
         return null;
     }
 
+    $erro = $arquivo['error'] ?? UPLOAD_ERR_OK;
+
+    if ($erro === UPLOAD_ERR_INI_SIZE || $erro === UPLOAD_ERR_FORM_SIZE) {
+        return 'ERRO_TAMANHO';
+    }
+
+    if ($erro !== UPLOAD_ERR_OK) {
+        return null;
+    }
+
     $extensoesPermitidas = ['jpg', 'jpeg', 'png'];
     $extensao = strtolower(pathinfo($arquivo['name'], PATHINFO_EXTENSION));
 
@@ -13,15 +23,23 @@ function fazerUploadImagem(array $arquivo): ?string
         return 'ERRO_FORMATO';
     }
 
-    $tiposMimePermitidos = ['image/jpeg', 'image/png'];
-    $tipoReal = mime_content_type($arquivo['tmp_name']);
+    if (function_exists('getimagesize')) {
+        $imagem = @getimagesize($arquivo['tmp_name']);
+        $tiposPermitidos = [IMAGETYPE_JPEG, IMAGETYPE_PNG];
 
-    if (!in_array($tipoReal, $tiposMimePermitidos, true)) {
-        return 'ERRO_FORMATO';
+        if (!$imagem || !in_array($imagem[2], $tiposPermitidos, true)) {
+            return 'ERRO_FORMATO';
+        }
+    }
+
+    $pasta = __DIR__ . '/../uploads';
+
+    if (!is_dir($pasta)) {
+        mkdir($pasta, 0777, true);
     }
 
     $nomeArquivo = uniqid('veiculo_', true) . '.' . $extensao;
-    $caminhoDestino = __DIR__ . '/../uploads/' . $nomeArquivo;
+    $caminhoDestino = $pasta . '/' . $nomeArquivo;
 
     if (!move_uploaded_file($arquivo['tmp_name'], $caminhoDestino)) {
         return null;

@@ -9,6 +9,11 @@ require_once __DIR__ . '/include/funcoes.php';
 $situacoes = ['Disponível', 'Reservado', 'Vendido', 'Em desmontagem', 'Sucata'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (empty($_POST) && !empty($_SERVER['CONTENT_LENGTH'])) {
+        header('Location: cadastrarCarro.php?msg=imagem_grande');
+        exit;
+    }
+
     $dados = [
         'id_cliente'    => (int) ($_POST['id_cliente'] ?? 0),
         'modelo'        => trim($_POST['modelo'] ?? ''),
@@ -33,6 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $resultadoUpload = fazerUploadImagem($_FILES['imagem']);
         if ($resultadoUpload === 'ERRO_FORMATO') {
             header('Location: cadastrarCarro.php?msg=imagem_invalida');
+            exit;
+        }
+        if ($resultadoUpload === 'ERRO_TAMANHO') {
+            header('Location: cadastrarCarro.php?msg=imagem_grande');
             exit;
         }
         $dados['imagem'] = $resultadoUpload;
