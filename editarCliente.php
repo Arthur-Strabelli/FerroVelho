@@ -17,6 +17,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    $clienteExistente = $clienteBD->buscarPorCpf($cpf);
+
+    if ($clienteExistente && (int) $clienteExistente['id_cliente'] !== $idCliente) {
+        header('Location: editarCliente.php?id=' . $idCliente . '&msg=cliente_cpf_duplicado');
+        exit;
+    }
+
     try {
         $clienteBD->editar($idCliente, $cpf, $nome, $telefone, $cidade);
         header('Location: visualizarCliente.php?msg=cliente_editado');

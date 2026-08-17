@@ -1,9 +1,4 @@
 <?php
-/**
- * include/upload.php
- * Realiza o upload de imagens de veículos, restrito a JPG, JPEG e PNG.
- * Retorna o nome do arquivo salvo, ou null em caso de erro/ausência de arquivo.
- */
 
 function fazerUploadImagem(array $arquivo): ?string
 {

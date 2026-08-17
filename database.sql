@@ -1,20 +1,9 @@
--- =========================================================
--- Ferro-Velho AG - Script de criação do banco de dados
--- =========================================================
-
 CREATE DATABASE IF NOT EXISTS ferro_velho_ag
     DEFAULT CHARACTER SET utf8mb4
     DEFAULT COLLATE utf8mb4_unicode_ci;
 
 USE ferro_velho_ag;
 
--- ---------------------------------------------------------
--- Tabela: usuarios (login do sistema)
--- O CPF é a chave primária: garante que não existam dois
--- usuários diferentes com o mesmo CPF. A senha é armazenada
--- mas NÃO é validada no login (aceita qualquer valor) -
--- simplificação para fins didáticos.
--- ---------------------------------------------------------
 CREATE TABLE IF NOT EXISTS usuarios (
     cpf          VARCHAR(14) NOT NULL PRIMARY KEY,
     nome         VARCHAR(150) NOT NULL,
@@ -22,9 +11,6 @@ CREATE TABLE IF NOT EXISTS usuarios (
     criado_em    DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- ---------------------------------------------------------
--- Tabela: clientes
--- ---------------------------------------------------------
 CREATE TABLE IF NOT EXISTS clientes (
     id_cliente   INT AUTO_INCREMENT PRIMARY KEY,
     cpf          VARCHAR(14) NOT NULL UNIQUE,
@@ -34,9 +20,6 @@ CREATE TABLE IF NOT EXISTS clientes (
     criado_em    DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- ---------------------------------------------------------
--- Tabela: veiculos
--- ---------------------------------------------------------
 CREATE TABLE IF NOT EXISTS veiculos (
     id_veiculo     INT AUTO_INCREMENT PRIMARY KEY,
     id_cliente     INT NULL,
@@ -56,9 +39,6 @@ CREATE TABLE IF NOT EXISTS veiculos (
         REFERENCES clientes(id_cliente) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
--- ---------------------------------------------------------
--- Tabela: comentarios (histórico vinculado ao veículo)
--- ---------------------------------------------------------
 CREATE TABLE IF NOT EXISTS comentarios (
     id_comentario  INT AUTO_INCREMENT PRIMARY KEY,
     id_veiculo     INT NOT NULL,
@@ -71,9 +51,6 @@ CREATE TABLE IF NOT EXISTS comentarios (
         REFERENCES veiculos(id_veiculo) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- ---------------------------------------------------------
--- Tabela: galeria (fotos extras do veículo - opcional/futuro)
--- ---------------------------------------------------------
 CREATE TABLE IF NOT EXISTS galeria_fotos (
     id_foto     INT AUTO_INCREMENT PRIMARY KEY,
     id_veiculo  INT NOT NULL,

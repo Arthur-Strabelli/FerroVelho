@@ -1,12 +1,3 @@
-/* =========================================================
-   Ferro-Velho AG - Folha de estilos
-   Paleta:
-     Principal  #C62828 (vermelho)
-     Secundária #FFFFFF (branco)
-     Menus      #424242 (cinza escuro)
-     Fundos     #F5F5F5 (cinza claro)
-   ========================================================= */
-
 :root {
     --cor-principal: #C62828;
     --cor-principal-hover: #A81F1F;
@@ -31,8 +22,6 @@ a {
 a:hover {
     color: var(--cor-principal-hover);
 }
-
-/* ---------- Navbar ---------- */
 
 .navbar-fva {
     background-color: var(--cor-menu);
@@ -66,8 +55,6 @@ a:hover {
     height: 50px;
 }
 
-/* ---------- Botões ---------- */
-
 .btn-fva-primary {
     background-color: var(--cor-principal);
     border-color: var(--cor-principal);
@@ -92,8 +79,6 @@ a:hover {
     background-color: #2E2E2E;
     color: var(--cor-secundaria);
 }
-
-/* ---------- Tela de login ---------- */
 
 .tela-login {
     padding-top: 60px;
@@ -126,8 +111,6 @@ a:hover {
     font-size: 12px;
     text-align: center;
 }
-
-/* ---------- Página inicial ---------- */
 
 .pagina-inicial {
     padding: 30px 20px;
@@ -166,8 +149,6 @@ a:hover {
     font-size: 28px;
     margin-bottom: 8px;
 }
-
-/* ---------- Cards de veículo ---------- */
 
 .card-veiculo {
     background-color: var(--cor-secundaria);
@@ -269,8 +250,6 @@ a:hover {
     margin-top: 10px;
 }
 
-/* ---------- Formulários ---------- */
-
 .pagina-formulario {
     padding: 30px 20px;
 }
@@ -287,8 +266,6 @@ a:hover {
     border: 1px solid #ddd;
 }
 
-/* ---------- Tabelas ---------- */
-
 .tabela-fva thead {
     background-color: var(--cor-menu);
     color: var(--cor-secundaria);
@@ -297,8 +274,6 @@ a:hover {
 .secao-pesquisa-lista {
     margin: 20px 0;
 }
-
-/* ---------- Rodapé ---------- */
 
 .rodape-fva {
     background-color: var(--cor-menu);

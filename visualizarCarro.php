@@ -2,10 +2,10 @@
 require_once __DIR__ . '/config/sessao.php';
 exigirLogin();
 require_once __DIR__ . '/include/CarroBD.php';
+require_once __DIR__ . '/include/funcoes.php';
 
 $carroBD = new CarroBD();
 
-// Adicionar comentário
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['acao'] === 'comentar') {
     $idVeiculo = (int) ($_POST['id_veiculo'] ?? 0);
     $autor = trim($_POST['autor'] ?? '');
@@ -73,9 +73,8 @@ require_once __DIR__ . '/include/navbar.php';
                 <div class="col-sm-4 col-xs-12" id="veiculo-<?= $idVeiculo ?>">
                     <div class="card-veiculo">
 
-                        <img src="uploads/<?= htmlspecialchars($veiculo['imagem'] ?: 'sem-imagem.png') ?>"
-                             alt="<?= htmlspecialchars($veiculo['modelo']) ?>"
-                             onerror="this.src='imagens/sem-imagem.png'">
+                        <img src="<?= htmlspecialchars(imagemVeiculo($veiculo['imagem'])) ?>"
+                             alt="<?= htmlspecialchars($veiculo['modelo']) ?>">
 
                         <div class="card-veiculo-corpo">
                             <span class="etiqueta-situacao etiqueta-<?= strtolower(str_replace(' ', '-', $veiculo['situacao'])) ?>">
@@ -103,7 +102,6 @@ require_once __DIR__ . '/include/navbar.php';
                                 </a>
                             </div>
 
-                            <!-- Painel expansível: descrição completa, comentários e novo comentário -->
                             <div id="detalhes-<?= $idVeiculo ?>" class="painel-detalhes" style="display:none;">
 
                                 <h5>Descrição</h5>

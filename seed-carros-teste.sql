@@ -1,17 +1,3 @@
--- =========================================================
--- Ferro-Velho AG - Dados de teste
--- 3 veículos genéricos em estado "preocupante", cada um com
--- um comentário exagerado do vendedor.
---
--- Execute este script (via phpMyAdmin > Importar, ou colando
--- na aba SQL) DEPOIS de ter rodado o database.sql.
---
--- OBS: o campo `imagem` fica NULL de propósito - eu não
--- consigo gerar fotos reais de carros sucateados. O sistema
--- mostrará a imagem padrão (imagens/sem-imagem.png) até você
--- colocar arquivos reais em uploads/ e atualizar o campo.
--- =========================================================
-
 USE ferro_velho_ag;
 
 INSERT INTO veiculos
@@ -57,7 +43,6 @@ VALUES
         0
     );
 
--- Recupera os IDs recém-inseridos para vincular os comentários
 SET @id_uno   = (SELECT id_veiculo FROM veiculos WHERE modelo = 'Uno' AND marca = 'Fiat' ORDER BY id_veiculo DESC LIMIT 1);
 SET @id_gol   = (SELECT id_veiculo FROM veiculos WHERE modelo = 'Gol' AND marca = 'Volkswagen' ORDER BY id_veiculo DESC LIMIT 1);
 SET @id_corsa = (SELECT id_veiculo FROM veiculos WHERE modelo = 'Corsa' AND marca = 'Chevrolet' ORDER BY id_veiculo DESC LIMIT 1);

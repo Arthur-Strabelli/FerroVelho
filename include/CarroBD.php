@@ -1,9 +1,4 @@
 <?php
-/**
- * include/CarroBD.php
- * Camada de acesso a dados (DAO) para as tabelas veiculos e comentarios.
- * Todas as consultas usam PDO com prepare() e bindParam()/bindValue().
- */
 
 require_once __DIR__ . '/../config/conexao.php';
 
@@ -83,7 +78,7 @@ class CarroBD
         return $stmt->execute();
     }
 
-    public function buscarPorId(int $idVeiculo): array|false
+    public function buscarPorId(int $idVeiculo)
     {
         $stmt = $this->pdo->prepare('SELECT * FROM veiculos WHERE id_veiculo = :id');
         $stmt->bindParam(':id', $idVeiculo, PDO::PARAM_INT);
@@ -120,8 +115,6 @@ class CarroBD
 
         return $stmt->fetchAll();
     }
-
-    // ---------- Comentários ----------
 
     public function adicionarComentario(int $idVeiculo, string $autor, string $comentario): bool
     {

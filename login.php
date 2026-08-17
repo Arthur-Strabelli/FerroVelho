@@ -2,7 +2,6 @@
 require_once __DIR__ . '/config/sessao.php';
 require_once __DIR__ . '/config/conexao.php';
 
-// Logout
 if (isset($_GET['acao']) && $_GET['acao'] === 'sair') {
     session_unset();
     session_destroy();
@@ -10,7 +9,6 @@ if (isset($_GET['acao']) && $_GET['acao'] === 'sair') {
     exit;
 }
 
-// Já logado? vai direto pra página inicial
 if (usuarioLogado()) {
     header('Location: index.php');
     exit;
@@ -28,25 +26,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $pdo = conectar();
 
-    // O CPF é a chave primária: identifica o usuário de forma única.
-    // A senha não é validada (aceita qualquer valor) - fins didáticos.
     $stmt = $pdo->prepare('SELECT * FROM usuarios WHERE cpf = :cpf');
     $stmt->bindParam(':cpf', $cpf);
     $stmt->execute();
     $usuario = $stmt->fetch();
 
     if ($usuario) {
-        // CPF já cadastrado: entra direto, sem checar nome ou senha.
+        $senhaValida = password_verify($senha, $usuario['senha'] ?? '');
+
+        if (!$senhaValida && $senha === $usuario['senha']) {
+            $senhaValida = true;
+            $stmtSenha = $pdo->prepare('UPDATE usuarios SET senha = :senha WHERE cpf = :cpf');
+            $senhaNova = password_hash($senha, PASSWORD_DEFAULT);
+            $stmtSenha->bindParam(':senha', $senhaNova);
+            $stmtSenha->bindParam(':cpf', $cpf);
+            $stmtSenha->execute();
+        }
+
+        if (!$senhaValida) {
+            header('Location: login.php?msg=login_erro');
+            exit;
+        }
+
         $_SESSION['cpf'] = $usuario['cpf'];
         $_SESSION['nome_usuario'] = $usuario['nome'];
     } else {
-        // CPF novo: cadastra automaticamente e já loga em seguida.
         $stmtInsert = $pdo->prepare(
             'INSERT INTO usuarios (cpf, nome, senha) VALUES (:cpf, :nome, :senha)'
         );
+        $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
         $stmtInsert->bindParam(':cpf', $cpf);
         $stmtInsert->bindParam(':nome', $nome);
-        $stmtInsert->bindParam(':senha', $senha);
+        $stmtInsert->bindParam(':senha', $senhaHash);
         $stmtInsert->execute();
 
         $_SESSION['cpf'] = $cpf;
@@ -67,7 +78,7 @@ require_once __DIR__ . '/include/header.php';
             <div class="col-sm-6 col-sm-offset-3 col-xs-12">
 
                 <div class="logo-login text-center">
-                    <img src="imagens/FerroVelhoAG.png" alt="Ferro-Velho AG" onerror="this.style.display='none'">
+                    <img src="imagens/FerroVelhoAG.png" alt="Ferro-Velho AG">
                     <h1>Ferro-Velho AG</h1>
                 </div>
 

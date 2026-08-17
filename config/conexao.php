@@ -1,15 +1,10 @@
 <?php
-/**
- * config/conexao.php
- * Responsável por abrir a conexão PDO com o banco de dados.
- * Ajuste as constantes abaixo conforme o seu ambiente.
- */
 
 const DB_HOST = 'localhost';
 const DB_PORTA = '3306';
 const DB_NOME = 'ferro_velho_ag';
 const DB_USUARIO = 'root';
-const DB_SENHA = 'aluno';
+const DB_SENHA = 'usbw';
 const DB_CHARSET = 'utf8mb4';
 
 function conectar(): PDO

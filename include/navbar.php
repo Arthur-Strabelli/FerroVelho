@@ -1,8 +1,4 @@
 <?php
-/**
- * include/navbar.php
- * Menu de navegação fixo no topo, exibido em todas as páginas internas.
- */
 $paginaAtual = basename($_SERVER['PHP_SELF']);
 
 function ativo(string $pagina, string $atual): string
@@ -20,7 +16,7 @@ function ativo(string $pagina, string $atual): string
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="index.php">
-                <img src="imagens/logo.png" alt="Logo" onerror="this.style.display='none'">
+                <img src="imagens/FerroVelhoAG.png" alt="Logo">
                 Ferro-Velho AG
             </a>
         </div>

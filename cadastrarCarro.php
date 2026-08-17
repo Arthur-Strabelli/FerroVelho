@@ -4,6 +4,7 @@ exigirLogin();
 require_once __DIR__ . '/include/CarroBD.php';
 require_once __DIR__ . '/include/ClienteBD.php';
 require_once __DIR__ . '/include/upload.php';
+require_once __DIR__ . '/include/funcoes.php';
 
 $situacoes = ['Disponível', 'Reservado', 'Vendido', 'Em desmontagem', 'Sucata'];
 
@@ -13,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'modelo'        => trim($_POST['modelo'] ?? ''),
         'marca'         => trim($_POST['marca'] ?? ''),
         'ano'           => (int) ($_POST['ano'] ?? 0),
-        'preco'         => str_replace(',', '.', preg_replace('/[^\d,.]/', '', $_POST['preco'] ?? '0')),
+        'preco'         => converterPreco($_POST['preco'] ?? '0'),
         'quilometragem' => (int) ($_POST['quilometragem'] ?? 0),
         'cor'           => trim($_POST['cor'] ?? ''),
         'combustivel'   => trim($_POST['combustivel'] ?? ''),
