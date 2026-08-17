@@ -1,0 +1,313 @@
+/* =========================================================
+   Ferro-Velho AG - Folha de estilos
+   Paleta:
+     Principal  #C62828 (vermelho)
+     Secundária #FFFFFF (branco)
+     Menus      #424242 (cinza escuro)
+     Fundos     #F5F5F5 (cinza claro)
+   ========================================================= */
+
+:root {
+    --cor-principal: #C62828;
+    --cor-principal-hover: #A81F1F;
+    --cor-secundaria: #FFFFFF;
+    --cor-menu: #424242;
+    --cor-fundo: #F5F5F5;
+    --cor-sucesso: #5CB85C;
+    --cor-perigo: #D9534F;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #333;
+    padding-top: 0;
+}
+
+a {
+    color: var(--cor-principal);
+}
+
+a:hover {
+    color: var(--cor-principal-hover);
+}
+
+/* ---------- Navbar ---------- */
+
+.navbar-fva {
+    background-color: var(--cor-menu);
+    border: none;
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+.navbar-fva .navbar-brand {
+    color: var(--cor-secundaria);
+    font-weight: bold;
+}
+
+.navbar-fva .navbar-brand img {
+    height: 28px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.navbar-fva .navbar-nav > li > a {
+    color: #E0E0E0;
+}
+
+.navbar-fva .navbar-nav > li > a:hover,
+.navbar-fva .navbar-nav > li.active > a {
+    color: var(--cor-secundaria);
+    background-color: var(--cor-principal);
+}
+
+.navbar-espacador {
+    height: 50px;
+}
+
+/* ---------- Botões ---------- */
+
+.btn-fva-primary {
+    background-color: var(--cor-principal);
+    border-color: var(--cor-principal);
+    color: var(--cor-secundaria);
+}
+
+.btn-fva-primary:hover,
+.btn-fva-primary:focus {
+    background-color: var(--cor-principal-hover);
+    border-color: var(--cor-principal-hover);
+    color: var(--cor-secundaria);
+}
+
+.btn-fva-secundario {
+    background-color: var(--cor-menu);
+    border-color: var(--cor-menu);
+    color: var(--cor-secundaria);
+}
+
+.btn-fva-secundario:hover,
+.btn-fva-secundario:focus {
+    background-color: #2E2E2E;
+    color: var(--cor-secundaria);
+}
+
+/* ---------- Tela de login ---------- */
+
+.tela-login {
+    padding-top: 60px;
+}
+
+.logo-login {
+    margin-bottom: 30px;
+}
+
+.logo-login img {
+    max-width: 220px;
+    margin-bottom: 10px;
+}
+
+.logo-login h1 {
+    color: var(--cor-principal);
+    font-weight: bold;
+}
+
+.painel-login {
+    background-color: var(--cor-secundaria);
+    padding: 30px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.texto-ajuda-login {
+    margin-top: 15px;
+    margin-bottom: 0;
+    font-size: 12px;
+    text-align: center;
+}
+
+/* ---------- Página inicial ---------- */
+
+.pagina-inicial {
+    padding: 30px 20px;
+}
+
+.secao-pesquisa h2 {
+    color: var(--cor-menu);
+    margin-bottom: 20px;
+}
+
+.secao-atalhos {
+    margin: 20px 0;
+}
+
+.atalho-fva {
+    display: block;
+    background-color: var(--cor-secundaria);
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 25px 10px;
+    margin-bottom: 15px;
+    color: var(--cor-menu);
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.atalho-fva:hover {
+    background-color: var(--cor-principal);
+    color: var(--cor-secundaria);
+    text-decoration: none;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.atalho-fva i {
+    display: block;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+/* ---------- Cards de veículo ---------- */
+
+.card-veiculo {
+    background-color: var(--cor-secundaria);
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 25px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.card-veiculo img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-veiculo-corpo {
+    padding: 15px;
+    position: relative;
+}
+
+.card-veiculo-corpo h4 {
+    margin-top: 0;
+    color: var(--cor-menu);
+}
+
+.marca-ano {
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.preco-veiculo {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--cor-principal);
+}
+
+.avaliacao-veiculo {
+    color: #B8860B;
+}
+
+.descricao-resumida {
+    color: #555;
+}
+
+.etiqueta-situacao {
+    position: absolute;
+    top: -34px;
+    right: 15px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--cor-secundaria);
+    background-color: var(--cor-menu);
+}
+
+.etiqueta-disponível { background-color: var(--cor-sucesso); }
+.etiqueta-reservado { background-color: #F0AD4E; }
+.etiqueta-vendido { background-color: #777; }
+.etiqueta-em-desmontagem { background-color: #5BC0DE; }
+.etiqueta-sucata { background-color: var(--cor-perigo); }
+
+.acoes-card {
+    margin-top: 10px;
+}
+
+.painel-detalhes {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #ddd;
+}
+
+.painel-detalhes h5 {
+    color: var(--cor-menu);
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.lista-detalhes {
+    list-style: none;
+    padding-left: 0;
+}
+
+.comentario-item {
+    background-color: var(--cor-fundo);
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+}
+
+.comentario-item .data-comentario {
+    float: right;
+    color: #999;
+    font-size: 12px;
+}
+
+.form-comentario {
+    margin-top: 10px;
+}
+
+/* ---------- Formulários ---------- */
+
+.pagina-formulario {
+    padding: 30px 20px;
+}
+
+.form-fva label {
+    font-weight: 600;
+    color: var(--cor-menu);
+}
+
+.preview-imagem {
+    max-width: 200px;
+    margin-top: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+/* ---------- Tabelas ---------- */
+
+.tabela-fva thead {
+    background-color: var(--cor-menu);
+    color: var(--cor-secundaria);
+}
+
+.secao-pesquisa-lista {
+    margin: 20px 0;
+}
+
+/* ---------- Rodapé ---------- */
+
+.rodape-fva {
+    background-color: var(--cor-menu);
+    color: #ccc;
+    padding: 20px 0;
+    margin-top: 40px;
+    text-align: center;
+}
+
+.rodape-fva p {
+    margin: 2px 0;
+}

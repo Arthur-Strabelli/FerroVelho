@@ -1,0 +1,23 @@
+<?php
+/**
+ * include/header.php
+ * Abre o documento HTML e importa CSS/JS globais.
+ * A variável opcional $tituloPagina pode ser definida antes do include.
+ */
+$tituloPagina = $tituloPagina ?? 'Ferro-Velho AG';
+?>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= htmlspecialchars($tituloPagina) ?></title>
+
+    <!-- Bootstrap 3 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- CSS próprio -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
