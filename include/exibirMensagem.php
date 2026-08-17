@@ -1,8 +1,4 @@
 <?php
-/**
- * include/exibirMensagem.php
- * Lê o parâmetro ?msg= da URL e exibe um alerta Bootstrap correspondente.
- */
 
 require_once __DIR__ . '/../tipoMensagem.php';
 

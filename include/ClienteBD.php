@@ -1,9 +1,4 @@
 <?php
-/**
- * include/ClienteBD.php
- * Camada de acesso a dados (DAO) para a tabela clientes.
- * Todas as consultas usam PDO com prepare() e bindParam()/bindValue().
- */
 
 require_once __DIR__ . '/../config/conexao.php';
 
@@ -51,7 +46,7 @@ class ClienteBD
         return $stmt->execute();
     }
 
-    public function buscarPorId(int $idCliente): array|false
+    public function buscarPorId(int $idCliente)
     {
         $stmt = $this->pdo->prepare('SELECT * FROM clientes WHERE id_cliente = :id');
         $stmt->bindParam(':id', $idCliente, PDO::PARAM_INT);
@@ -60,7 +55,7 @@ class ClienteBD
         return $stmt->fetch();
     }
 
-    public function buscarPorCpf(string $cpf): array|false
+    public function buscarPorCpf(string $cpf)
     {
         $stmt = $this->pdo->prepare('SELECT * FROM clientes WHERE cpf = :cpf');
         $stmt->bindParam(':cpf', $cpf);

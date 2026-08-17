@@ -23,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         $idCliente = $clienteBD->cadastrar($cpf, $nome, $telefone, $cidade);
-        // Após salvar, abre automaticamente o cadastro de veículo vinculado a este cliente
         header('Location: cadastrarCarro.php?id_cliente=' . $idCliente . '&msg=cliente_cadastrado');
         exit;
     } catch (PDOException $e) {

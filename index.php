@@ -2,6 +2,7 @@
 require_once __DIR__ . '/config/sessao.php';
 exigirLogin();
 require_once __DIR__ . '/include/CarroBD.php';
+require_once __DIR__ . '/include/funcoes.php';
 
 $carroBD = new CarroBD();
 $ultimosVeiculos = $carroBD->listarUltimos(6);
@@ -15,7 +16,6 @@ require_once __DIR__ . '/include/navbar.php';
 
     <?php require_once __DIR__ . '/include/exibirMensagem.php'; ?>
 
-    <!-- Pesquisa -->
     <div class="row secao-pesquisa">
         <div class="col-sm-8 col-sm-offset-2 text-center">
             <h2>Pesquisar veículo</h2>
@@ -35,7 +35,6 @@ require_once __DIR__ . '/include/navbar.php';
 
     <hr>
 
-    <!-- Atalhos -->
     <div class="row secao-atalhos text-center">
         <div class="col-sm-3 col-xs-6">
             <a href="cadastrarCliente.php" class="atalho-fva">
@@ -65,7 +64,6 @@ require_once __DIR__ . '/include/navbar.php';
 
     <hr>
 
-    <!-- Últimos veículos -->
     <div class="row">
         <div class="col-xs-12">
             <h2>Últimos veículos cadastrados</h2>
@@ -81,9 +79,8 @@ require_once __DIR__ . '/include/navbar.php';
             <?php foreach ($ultimosVeiculos as $veiculo): ?>
                 <div class="col-sm-4 col-xs-12">
                     <div class="card-veiculo">
-                        <img src="uploads/<?= htmlspecialchars($veiculo['imagem'] ?: 'sem-imagem.png') ?>"
-                             alt="<?= htmlspecialchars($veiculo['modelo']) ?>"
-                             onerror="this.src='imagens/sem-imagem.png'">
+                        <img src="<?= htmlspecialchars(imagemVeiculo($veiculo['imagem'])) ?>"
+                             alt="<?= htmlspecialchars($veiculo['modelo']) ?>">
                         <div class="card-veiculo-corpo">
                             <h4><?= htmlspecialchars($veiculo['marca'] . ' ' . $veiculo['modelo']) ?></h4>
                             <p><?= (int) $veiculo['ano'] ?> &middot; R$ <?= number_format($veiculo['preco'], 2, ',', '.') ?></p>

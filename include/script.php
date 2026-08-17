@@ -1,17 +1,10 @@
 <?php header('Content-Type: application/javascript; charset=UTF-8'); ?>
-/**
- * include/script.php
- * Scripts jQuery globais do sistema Ferro-Velho AG.
- */
-
 $(document).ready(function () {
 
-    // Fecha alertas automaticamente após 5 segundos
     setTimeout(function () {
         $('.alert').fadeOut('slow');
     }, 5000);
 
-    // Confirmação antes de excluir cliente ou veículo
     $('.btn-excluir').on('click', function (e) {
         var confirmar = confirm('Tem certeza que deseja excluir este registro? Esta ação não pode ser desfeita.');
         if (!confirmar) {
@@ -19,7 +12,6 @@ $(document).ready(function () {
         }
     });
 
-    // Expande/recolhe a descrição, histórico de comentários e formulário de novo comentário
     $('.btn-ler-mais').on('click', function () {
         var idVeiculo = $(this).data('id');
         var painel = $('#detalhes-' + idVeiculo);
@@ -29,7 +21,6 @@ $(document).ready(function () {
         $(this).text(textoAtual.indexOf('Ler mais') !== -1 ? 'Ler menos -' : 'Ler mais +');
     });
 
-    // Máscara simples de CPF
     $('#cpf').on('input', function () {
         var v = $(this).val().replace(/\D/g, '').slice(0, 11);
         v = v.replace(/(\d{3})(\d)/, '$1.$2');
@@ -38,7 +29,6 @@ $(document).ready(function () {
         $(this).val(v);
     });
 
-    // Máscara simples de telefone
     $('#telefone').on('input', function () {
         var v = $(this).val().replace(/\D/g, '').slice(0, 11);
         if (v.length > 10) {
@@ -49,7 +39,6 @@ $(document).ready(function () {
         $(this).val(v);
     });
 
-    // Preview de imagem antes do upload
     $('#imagem').on('change', function () {
         var arquivo = this.files[0];
         if (arquivo) {
@@ -61,7 +50,6 @@ $(document).ready(function () {
         }
     });
 
-    // Filtro de pesquisa da página inicial e da listagem de veículos
     $('#formPesquisar').on('submit', function () {
         var termo = $('#pesquisar').val().trim();
         if (termo === '') {
