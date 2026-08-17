@@ -1,10 +1,10 @@
 <?php
 
 const DB_HOST = 'localhost';
-const DB_PORTA = '3306';
+const DB_PORTA = '3008';
 const DB_NOME = 'ferro_velho_ag';
 const DB_USUARIO = 'root';
-const DB_SENHA = 'usbw';
+const DB_SENHA = 'aluno';
 const DB_CHARSET = 'utf8mb4';
 
 function conectar(): PDO

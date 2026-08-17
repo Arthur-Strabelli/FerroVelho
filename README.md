@@ -7,7 +7,7 @@ Sistema de gerenciamento de ferro-velho (clientes, veículos, fotos e comentári
 1. Copie a pasta do projeto para dentro de `usbwebserver/root/` (ex.: `root/ferrovelho`).
 2. Abra o USBWebserver e clique em **Start** para subir o Apache e o MySQL.
 3. Abra o phpMyAdmin (botão **PHPMyAdmin** do painel), vá em **Importar** e importe o `database.sql`.
-4. Confira em `config/conexao.php` o usuário e a senha do MySQL. O padrão do USBWebserver é usuário `root` e senha `usbw`.
+4. Confira em `config/conexao.php` a porta, o usuário e a senha do MySQL (estão como `3008`, `root` e `aluno`, que são os que eu uso no meu USBWebserver). A porta e a senha aparecem no painel do USBWebserver, em **Settings**.
 5. Acesse `http://localhost:8080/ferrovelho/login.php`.
 
 Se quiser alguns veículos de exemplo, importe o `seed-carros-teste.sql` depois do `database.sql`.
