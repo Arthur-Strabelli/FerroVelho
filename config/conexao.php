@@ -1,7 +1,7 @@
 <?php
 
 const DB_HOST = 'localhost';
-const DB_PORTA = '3008';
+const DB_PORTA = '3308';
 const DB_NOME = 'ferro_velho_ag';
 const DB_USUARIO = 'root';
 const DB_SENHA = 'aluno';
