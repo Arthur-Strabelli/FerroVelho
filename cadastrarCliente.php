@@ -4,10 +4,10 @@ exigirLogin();
 require_once __DIR__ . '/include/ClienteBD.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $cpf      = trim($_POST['cpf'] ?? '');
-    $nome     = trim($_POST['nome'] ?? '');
-    $telefone = trim($_POST['telefone'] ?? '');
-    $cidade   = trim($_POST['cidade'] ?? '');
+    $cpf      = trim(isset($_POST['cpf']) ? $_POST['cpf'] : '');
+    $nome     = trim(isset($_POST['nome']) ? $_POST['nome'] : '');
+    $telefone = trim(isset($_POST['telefone']) ? $_POST['telefone'] : '');
+    $cidade   = trim(isset($_POST['cidade']) ? $_POST['cidade'] : '');
 
     if ($cpf === '' || $nome === '' || $telefone === '' || $cidade === '') {
         header('Location: cadastrarCliente.php?msg=campos_obrigatorios');

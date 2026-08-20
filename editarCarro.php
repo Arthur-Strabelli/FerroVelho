@@ -9,7 +9,7 @@ $situacoes = ['Disponível', 'Reservado', 'Vendido', 'Em desmontagem', 'Sucata']
 $combustiveis = ['Flex', 'Gasolina', 'Etanol', 'Diesel', 'Elétrico', 'Híbrido'];
 
 $carroBD = new CarroBD();
-$idVeiculo = (int) ($_GET['id'] ?? $_POST['id_veiculo'] ?? 0);
+$idVeiculo = (int) (isset($_GET['id']) ? $_GET['id'] : (isset($_POST['id_veiculo']) ? $_POST['id_veiculo'] : 0));
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($_POST) && !empty($_SERVER['CONTENT_LENGTH'])) {
@@ -18,16 +18,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $dados = [
-        'modelo'        => trim($_POST['modelo'] ?? ''),
-        'marca'         => trim($_POST['marca'] ?? ''),
-        'ano'           => (int) ($_POST['ano'] ?? 0),
-        'preco'         => converterPreco($_POST['preco'] ?? '0'),
-        'quilometragem' => (int) ($_POST['quilometragem'] ?? 0),
-        'cor'           => trim($_POST['cor'] ?? ''),
-        'combustivel'   => trim($_POST['combustivel'] ?? ''),
-        'situacao'      => $_POST['situacao'] ?? 'Disponível',
-        'descricao'     => trim($_POST['descricao'] ?? ''),
-        'avaliacao'     => max(0, min(10, (int) ($_POST['avaliacao'] ?? 0))),
+        'modelo'        => trim(isset($_POST['modelo']) ? $_POST['modelo'] : ''),
+        'marca'         => trim(isset($_POST['marca']) ? $_POST['marca'] : ''),
+        'ano'           => (int) (isset($_POST['ano']) ? $_POST['ano'] : 0),
+        'preco'         => converterPreco(isset($_POST['preco']) ? $_POST['preco'] : '0'),
+        'quilometragem' => (int) (isset($_POST['quilometragem']) ? $_POST['quilometragem'] : 0),
+        'cor'           => trim(isset($_POST['cor']) ? $_POST['cor'] : ''),
+        'combustivel'   => trim(isset($_POST['combustivel']) ? $_POST['combustivel'] : ''),
+        'situacao'      => isset($_POST['situacao']) ? $_POST['situacao'] : 'Disponível',
+        'descricao'     => trim(isset($_POST['descricao']) ? $_POST['descricao'] : ''),
+        'avaliacao'     => max(0, min(10, (int) (isset($_POST['avaliacao']) ? $_POST['avaliacao'] : 0))),
         'imagem'        => null,
     ];
 

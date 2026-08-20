@@ -1,7 +1,7 @@
 <?php
 $paginaAtual = basename($_SERVER['PHP_SELF']);
 
-function ativo(string $pagina, string $atual): string
+function ativo($pagina, $atual)
 {
     return $pagina === $atual ? 'active' : '';
 }

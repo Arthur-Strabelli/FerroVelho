@@ -1,6 +1,6 @@
 <?php
 
-function obterMensagem(string $codigo): ?array
+function obterMensagem($codigo)
 {
     $mensagens = [
         'cliente_cadastrado' => ['tipo' => 'success', 'texto' => 'Cliente cadastrado com sucesso!'],
@@ -26,5 +26,5 @@ function obterMensagem(string $codigo): ?array
         'campos_obrigatorios' => ['tipo' => 'warning', 'texto' => 'Preencha todos os campos obrigatórios.'],
     ];
 
-    return $mensagens[$codigo] ?? null;
+    return isset($mensagens[$codigo]) ? $mensagens[$codigo] : null;
 }

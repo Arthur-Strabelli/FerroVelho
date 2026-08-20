@@ -4,13 +4,13 @@ exigirLogin();
 require_once __DIR__ . '/include/ClienteBD.php';
 
 $clienteBD = new ClienteBD();
-$idCliente = (int) ($_GET['id'] ?? $_POST['id_cliente'] ?? 0);
+$idCliente = (int) (isset($_GET['id']) ? $_GET['id'] : (isset($_POST['id_cliente']) ? $_POST['id_cliente'] : 0));
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $cpf      = trim($_POST['cpf'] ?? '');
-    $nome     = trim($_POST['nome'] ?? '');
-    $telefone = trim($_POST['telefone'] ?? '');
-    $cidade   = trim($_POST['cidade'] ?? '');
+    $cpf      = trim(isset($_POST['cpf']) ? $_POST['cpf'] : '');
+    $nome     = trim(isset($_POST['nome']) ? $_POST['nome'] : '');
+    $telefone = trim(isset($_POST['telefone']) ? $_POST['telefone'] : '');
+    $cidade   = trim(isset($_POST['cidade']) ? $_POST['cidade'] : '');
 
     if ($cpf === '' || $nome === '' || $telefone === '' || $cidade === '') {
         header('Location: editarCliente.php?id=' . $idCliente . '&msg=campos_obrigatorios');

@@ -4,14 +4,14 @@ require_once __DIR__ . '/../config/conexao.php';
 
 class ClienteBD
 {
-    private PDO $pdo;
+    private $pdo;
 
     public function __construct()
     {
         $this->pdo = conectar();
     }
 
-    public function cadastrar(string $cpf, string $nome, string $telefone, string $cidade): int
+    public function cadastrar($cpf, $nome, $telefone, $cidade)
     {
         $sql = 'INSERT INTO clientes (cpf, nome, telefone, cidade) VALUES (:cpf, :nome, :telefone, :cidade)';
         $stmt = $this->pdo->prepare($sql);
@@ -24,7 +24,7 @@ class ClienteBD
         return (int) $this->pdo->lastInsertId();
     }
 
-    public function editar(int $idCliente, string $cpf, string $nome, string $telefone, string $cidade): bool
+    public function editar($idCliente, $cpf, $nome, $telefone, $cidade)
     {
         $sql = 'UPDATE clientes SET cpf = :cpf, nome = :nome, telefone = :telefone, cidade = :cidade
                 WHERE id_cliente = :id';
@@ -38,7 +38,7 @@ class ClienteBD
         return $stmt->execute();
     }
 
-    public function excluir(int $idCliente): bool
+    public function excluir($idCliente)
     {
         $stmt = $this->pdo->prepare('DELETE FROM clientes WHERE id_cliente = :id');
         $stmt->bindParam(':id', $idCliente, PDO::PARAM_INT);
@@ -46,7 +46,7 @@ class ClienteBD
         return $stmt->execute();
     }
 
-    public function buscarPorId(int $idCliente)
+    public function buscarPorId($idCliente)
     {
         $stmt = $this->pdo->prepare('SELECT * FROM clientes WHERE id_cliente = :id');
         $stmt->bindParam(':id', $idCliente, PDO::PARAM_INT);
@@ -55,7 +55,7 @@ class ClienteBD
         return $stmt->fetch();
     }
 
-    public function buscarPorCpf(string $cpf)
+    public function buscarPorCpf($cpf)
     {
         $stmt = $this->pdo->prepare('SELECT * FROM clientes WHERE cpf = :cpf');
         $stmt->bindParam(':cpf', $cpf);
@@ -64,7 +64,7 @@ class ClienteBD
         return $stmt->fetch();
     }
 
-    public function listarTodos(string $pesquisa = ''): array
+    public function listarTodos($pesquisa = '')
     {
         if ($pesquisa !== '') {
             $sql = 'SELECT * FROM clientes

@@ -4,12 +4,12 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-function usuarioLogado(): bool
+function usuarioLogado()
 {
     return isset($_SESSION['cpf']);
 }
 
-function exigirLogin(): void
+function exigirLogin()
 {
     if (!usuarioLogado()) {
         header('Location: login.php?msg=acesso_negado');

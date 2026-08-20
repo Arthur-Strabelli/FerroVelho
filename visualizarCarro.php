@@ -7,9 +7,9 @@ require_once __DIR__ . '/include/funcoes.php';
 $carroBD = new CarroBD();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['acao'] === 'comentar') {
-    $idVeiculo = (int) ($_POST['id_veiculo'] ?? 0);
-    $autor = trim($_POST['autor'] ?? '');
-    $comentario = trim($_POST['comentario'] ?? '');
+    $idVeiculo = (int) (isset($_POST['id_veiculo']) ? $_POST['id_veiculo'] : 0);
+    $autor = trim(isset($_POST['autor']) ? $_POST['autor'] : '');
+    $comentario = trim(isset($_POST['comentario']) ? $_POST['comentario'] : '');
 
     if ($idVeiculo > 0 && $autor !== '' && $comentario !== '') {
         $carroBD->adicionarComentario($idVeiculo, $autor, $comentario);
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
     exit;
 }
 
-$pesquisa = trim($_GET['pesquisa'] ?? '');
+$pesquisa = trim(isset($_GET['pesquisa']) ? $_GET['pesquisa'] : '');
 $veiculos = $carroBD->listarTodos($pesquisa);
 
 $tituloPagina = 'Veículos - Ferro-Velho AG';
@@ -68,7 +68,7 @@ require_once __DIR__ . '/include/navbar.php';
                 <?php
                     $idVeiculo = (int) $veiculo['id_veiculo'];
                     $comentarios = $carroBD->listarComentarios($idVeiculo);
-                    $descricaoResumida = mb_strimwidth($veiculo['descricao'] ?? '', 0, 120, '...');
+                    $descricaoResumida = resumirTexto(isset($veiculo['descricao']) ? $veiculo['descricao'] : '', 120);
                 ?>
                 <div class="col-sm-4 col-xs-12" id="veiculo-<?= $idVeiculo ?>">
                     <div class="card-veiculo">

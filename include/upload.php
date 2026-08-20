@@ -1,12 +1,12 @@
 <?php
 
-function fazerUploadImagem(array $arquivo): ?string
+function fazerUploadImagem(array $arquivo)
 {
     if (empty($arquivo['name'])) {
         return null;
     }
 
-    $erro = $arquivo['error'] ?? UPLOAD_ERR_OK;
+    $erro = isset($arquivo['error']) ? $arquivo['error'] : UPLOAD_ERR_OK;
 
     if ($erro === UPLOAD_ERR_INI_SIZE || $erro === UPLOAD_ERR_FORM_SIZE) {
         return 'ERRO_TAMANHO';

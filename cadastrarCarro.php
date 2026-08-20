@@ -15,17 +15,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $dados = [
-        'id_cliente'    => (int) ($_POST['id_cliente'] ?? 0),
-        'modelo'        => trim($_POST['modelo'] ?? ''),
-        'marca'         => trim($_POST['marca'] ?? ''),
-        'ano'           => (int) ($_POST['ano'] ?? 0),
-        'preco'         => converterPreco($_POST['preco'] ?? '0'),
-        'quilometragem' => (int) ($_POST['quilometragem'] ?? 0),
-        'cor'           => trim($_POST['cor'] ?? ''),
-        'combustivel'   => trim($_POST['combustivel'] ?? ''),
-        'situacao'      => $_POST['situacao'] ?? 'Disponível',
-        'descricao'     => trim($_POST['descricao'] ?? ''),
-        'avaliacao'     => max(0, min(10, (int) ($_POST['avaliacao'] ?? 0))),
+        'id_cliente'    => (int) (isset($_POST['id_cliente']) ? $_POST['id_cliente'] : 0),
+        'modelo'        => trim(isset($_POST['modelo']) ? $_POST['modelo'] : ''),
+        'marca'         => trim(isset($_POST['marca']) ? $_POST['marca'] : ''),
+        'ano'           => (int) (isset($_POST['ano']) ? $_POST['ano'] : 0),
+        'preco'         => converterPreco(isset($_POST['preco']) ? $_POST['preco'] : '0'),
+        'quilometragem' => (int) (isset($_POST['quilometragem']) ? $_POST['quilometragem'] : 0),
+        'cor'           => trim(isset($_POST['cor']) ? $_POST['cor'] : ''),
+        'combustivel'   => trim(isset($_POST['combustivel']) ? $_POST['combustivel'] : ''),
+        'situacao'      => isset($_POST['situacao']) ? $_POST['situacao'] : 'Disponível',
+        'descricao'     => trim(isset($_POST['descricao']) ? $_POST['descricao'] : ''),
+        'avaliacao'     => max(0, min(10, (int) (isset($_POST['avaliacao']) ? $_POST['avaliacao'] : 0))),
         'imagem'        => null,
     ];
 
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $clienteBD = new ClienteBD();
 $clientes = $clienteBD->listarTodos();
-$idClientePreSelecionado = (int) ($_GET['id_cliente'] ?? 0);
+$idClientePreSelecionado = (int) (isset($_GET['id_cliente']) ? $_GET['id_cliente'] : 0);
 
 $tituloPagina = 'Cadastrar Veículo - Ferro-Velho AG';
 require_once __DIR__ . '/include/header.php';

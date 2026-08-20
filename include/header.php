@@ -1,5 +1,5 @@
 <?php
-$tituloPagina = $tituloPagina ?? 'Ferro-Velho AG';
+$tituloPagina = isset($tituloPagina) ? $tituloPagina : 'Ferro-Velho AG';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

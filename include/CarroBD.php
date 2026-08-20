@@ -4,14 +4,14 @@ require_once __DIR__ . '/../config/conexao.php';
 
 class CarroBD
 {
-    private PDO $pdo;
+    private $pdo;
 
     public function __construct()
     {
         $this->pdo = conectar();
     }
 
-    public function cadastrar(array $dados): int
+    public function cadastrar(array $dados)
     {
         $sql = 'INSERT INTO veiculos
                     (id_cliente, modelo, marca, ano, preco, quilometragem, cor, combustivel,
@@ -37,7 +37,7 @@ class CarroBD
         return (int) $this->pdo->lastInsertId();
     }
 
-    public function editar(int $idVeiculo, array $dados): bool
+    public function editar($idVeiculo, array $dados)
     {
         $sql = 'UPDATE veiculos SET
                     modelo = :modelo, marca = :marca, ano = :ano, preco = :preco,
@@ -70,7 +70,7 @@ class CarroBD
         return $stmt->execute();
     }
 
-    public function excluir(int $idVeiculo): bool
+    public function excluir($idVeiculo)
     {
         $stmt = $this->pdo->prepare('DELETE FROM veiculos WHERE id_veiculo = :id');
         $stmt->bindParam(':id', $idVeiculo, PDO::PARAM_INT);
@@ -78,7 +78,7 @@ class CarroBD
         return $stmt->execute();
     }
 
-    public function buscarPorId(int $idVeiculo)
+    public function buscarPorId($idVeiculo)
     {
         $stmt = $this->pdo->prepare('SELECT * FROM veiculos WHERE id_veiculo = :id');
         $stmt->bindParam(':id', $idVeiculo, PDO::PARAM_INT);
@@ -87,7 +87,7 @@ class CarroBD
         return $stmt->fetch();
     }
 
-    public function listarTodos(string $pesquisa = ''): array
+    public function listarTodos($pesquisa = '')
     {
         if ($pesquisa !== '') {
             $sql = 'SELECT * FROM veiculos
@@ -108,7 +108,7 @@ class CarroBD
         return $stmt->fetchAll();
     }
 
-    public function listarUltimos(int $limite = 6): array
+    public function listarUltimos($limite = 6)
     {
         $sql = 'SELECT * FROM veiculos ORDER BY criado_em DESC LIMIT :limite';
         $stmt = $this->pdo->prepare($sql);
@@ -118,7 +118,7 @@ class CarroBD
         return $stmt->fetchAll();
     }
 
-    public function adicionarComentario(int $idVeiculo, string $autor, string $comentario): bool
+    public function adicionarComentario($idVeiculo, $autor, $comentario)
     {
         $sql = 'INSERT INTO comentarios (id_veiculo, autor, comentario, data_comentario, hora_comentario)
                 VALUES (:id_veiculo, :autor, :comentario, CURDATE(), CURTIME())';
@@ -130,7 +130,7 @@ class CarroBD
         return $stmt->execute();
     }
 
-    public function listarComentarios(int $idVeiculo): array
+    public function listarComentarios($idVeiculo)
     {
         $sql = 'SELECT * FROM comentarios WHERE id_veiculo = :id ORDER BY criado_em ASC';
         $stmt = $this->pdo->prepare($sql);

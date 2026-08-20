@@ -7,7 +7,7 @@ const DB_USUARIO = 'root';
 const DB_SENHA = 'usbw';
 const DB_CHARSET = 'utf8mb4';
 
-function conectar(): PDO
+function conectar()
 {
     static $pdo = null;
 

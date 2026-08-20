@@ -3,7 +3,7 @@ require_once __DIR__ . '/config/sessao.php';
 exigirLogin();
 require_once __DIR__ . '/include/ClienteBD.php';
 
-$pesquisa = trim($_GET['pesquisa'] ?? '');
+$pesquisa = trim(isset($_GET['pesquisa']) ? $_GET['pesquisa'] : '');
 $clienteBD = new ClienteBD();
 $clientes = $clienteBD->listarTodos($pesquisa);
 

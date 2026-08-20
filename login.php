@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/config/sessao.php';
 require_once __DIR__ . '/config/conexao.php';
+require_once __DIR__ . '/include/funcoes.php';
 
 if (isset($_GET['acao']) && $_GET['acao'] === 'sair') {
     session_unset();
@@ -15,9 +16,9 @@ if (usuarioLogado()) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $cpf  = trim($_POST['cpf'] ?? '');
-    $nome = trim($_POST['nome'] ?? '');
-    $senha = trim($_POST['senha'] ?? '');
+    $cpf  = trim(isset($_POST['cpf']) ? $_POST['cpf'] : '');
+    $nome = trim(isset($_POST['nome']) ? $_POST['nome'] : '');
+    $senha = trim(isset($_POST['senha']) ? $_POST['senha'] : '');
 
     if ($cpf === '' || $nome === '' || $senha === '') {
         header('Location: login.php?msg=campos_obrigatorios');
@@ -32,12 +33,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuario = $stmt->fetch();
 
     if ($usuario) {
-        $senhaValida = password_verify($senha, $usuario['senha'] ?? '');
+        $senhaValida = conferirSenha($senha, isset($usuario['senha']) ? $usuario['senha'] : '');
 
         if (!$senhaValida && $senha === $usuario['senha']) {
             $senhaValida = true;
             $stmtSenha = $pdo->prepare('UPDATE usuarios SET senha = :senha WHERE cpf = :cpf');
-            $senhaNova = password_hash($senha, PASSWORD_DEFAULT);
+            $senhaNova = gerarSenha($senha);
             $stmtSenha->bindParam(':senha', $senhaNova);
             $stmtSenha->bindParam(':cpf', $cpf);
             $stmtSenha->execute();
@@ -54,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmtInsert = $pdo->prepare(
             'INSERT INTO usuarios (cpf, nome, senha) VALUES (:cpf, :nome, :senha)'
         );
-        $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+        $senhaHash = gerarSenha($senha);
         $stmtInsert->bindParam(':cpf', $cpf);
         $stmtInsert->bindParam(':nome', $nome);
         $stmtInsert->bindParam(':senha', $senhaHash);
